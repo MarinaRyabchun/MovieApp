@@ -1,2 +1,40 @@
 # MovieApp
-A simple application to request a list of films from the web and view detailed information about the film
+Простое приложение для запроса списка фильмов из Интернета и просмотра подробной информации о фильме. Для запроса используется API IMDb. Для дублирования проекта необходимо зарегистрироваться на сайте IMDb для получения собстенного токена для запросов.
+
+<p align="center">
+<img src="https://github.com/MarinaRyabchun/movie-app/blob/main/screen1.jpg" height="600"/></h1>
+<img src="https://github.com/MarinaRyabchun/movie-app/blob/main/screen2.jpg" height="600"/></h1>
+<img src="https://github.com/MarinaRyabchun/movie-app/blob/main/screen3.jpg" height="600"/></h1>
+
+## Краткое описание:
+* Приложение для поиска фильмов в базе IMDb
+* Отображает найденные фильмы с краткой информацией в списке
+* Позволяет просмотреть детальную информацию о фильме на новом экране
+* Язык программирования — Swift
+
+## Технологии:
+* Бэкенд:
+    - IMDb ([API](https://imdb-api.com/))
+* Верстка кодом:
+    - Auto Layout
+* Архитектура:
+    - MVVM
+
+## ToDo
+- [ ] Перенести функцию запроса из сети в отдельный файл ServiceAPI
+- [ ] Перенести часть методов из VieController во VieModel
+- [ ] Добавить обработку ошибок при запросе из сети
+- [ ] Написать Unit Tests
+
+## Требования
+* iOS 14+
+* Xcode 12+
+* Swift 5
+
+## Установка
+* Скачайте репозиторий
+* Откройте проект в Xcode
+* Запустите проект на Симуляторе
+
+## Автор
+Марина Рябчун
