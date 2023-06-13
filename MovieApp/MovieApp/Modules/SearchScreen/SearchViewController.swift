@@ -11,7 +11,7 @@ protocol SearchViewProtocol {
     var searchBarText: String? { get set}
 }
 
-class SearchViewController: UIViewController , SearchViewProtocol {
+class SearchViewController: UIViewController, SearchViewProtocol {
     // MARK: - Properties
     var searchBarText: String?
     private var viewModel: MovieListViewModelProtocol = MovieListViewModel()
@@ -30,7 +30,6 @@ class SearchViewController: UIViewController , SearchViewProtocol {
         setupSearchBar()
         setupTableView()
         setupConstraints()
-        searchBarSearchButtonClicked(searchController.searchBar)
         setupNavigationBar()
         viewModel.users.bind { [weak self] _ in
             DispatchQueue.main.async {

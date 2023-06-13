@@ -209,9 +209,9 @@
 		E8E5A3162A2CBB140019A821 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E88529892A33C33800D347B0 /* ServiceAPIProtocol.swift */,
 				E8E5A3172A2CBBCA0019A821 /* ServiceAPI.swift */,
 				E885298B2A33C41B00D347B0 /* APIError.swift */,
-				E88529892A33C33800D347B0 /* ServiceAPIProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

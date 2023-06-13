@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MovieListViewModelProtocol {
     var service: ServiceAPIProtocol { get }
@@ -18,13 +19,17 @@ struct MovieListViewModel: MovieListViewModelProtocol {
     var users: Observable<[CellViewModel]> = Observable([])
     
     func fetchData(_ searchBarText: String) {
-        guard let url = URL(string: "https://imdb-api.com/API/AdvancedSearch/k_piw286ze/?title=\(searchBarText)") else { return }
+        guard let url = URL(string: "https://imdb-api.com/API/AdvancedSearch/k_piw286ze/?title=\(searchBarText)") else {
+            showAlert(message: "Sorry, nothing was found. Try changing the query or check the input language.")
+            return
+        }
         service.fetchData(url: url) { result in
             
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     print(error)
+                    showAlert(message: error.localizedDescription)
                 case .success(let movies):
                     users.value = movies.results.compactMap({
                         CellViewModel(image: $0.image, title: $0.title,
@@ -35,6 +40,18 @@ struct MovieListViewModel: MovieListViewModelProtocol {
                 }
             }
         }
+    }
+    
+    private func showAlert(message: String) {
+        
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        guard let vc = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+        
+        vc.present(alert, animated: true)
     }
 }
 
@@ -53,4 +70,3 @@ class Observable<T> {
         self.listener = listener
     }
 }
-
