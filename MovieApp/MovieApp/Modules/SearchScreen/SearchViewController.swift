@@ -14,12 +14,13 @@ protocol SearchViewProtocol {
 class SearchViewController: UIViewController, SearchViewProtocol {
     // MARK: - Properties
     var searchBarText: String?
-    private var viewModel: MovieListViewModelProtocol = MovieListViewModel()
+    private var viewModel: SearchViewModelProtocol = SearchViewModel()
     private let searchController = UISearchController(searchResultsController: nil)
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.backgroundColor = Constants.Colors.black
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.accessibilityIdentifier = "TableMovies"
         return tableView
     }()
     // MARK: - View Life Cycle

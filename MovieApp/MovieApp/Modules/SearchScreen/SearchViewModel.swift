@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-protocol MovieListViewModelProtocol {
+protocol SearchViewModelProtocol {
     var service: ServiceAPIProtocol { get }
     var users: Observable<[CellViewModel]> { get }
     func fetchData(_ searchBarText: String)
 }
 
-struct MovieListViewModel: MovieListViewModelProtocol {
-    let service: ServiceAPIProtocol = ServiceAPI()
+struct SearchViewModel: SearchViewModelProtocol {
+    var service: ServiceAPIProtocol = ServiceAPI()
     var users: Observable<[CellViewModel]> = Observable([])
     
     func fetchData(_ searchBarText: String) {

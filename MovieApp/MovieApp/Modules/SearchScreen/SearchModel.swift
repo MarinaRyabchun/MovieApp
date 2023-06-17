@@ -23,3 +23,14 @@ struct Movie: Decodable {
     var stars: String?
     var plot: String?
 }
+
+extension SearchResponse {
+    static func mockModel() -> SearchResponse {
+        return SearchResponse(results: [
+            Movie(image: "one", title: "1title", description: "1description",
+                  imDbRating: "1.0", imDbRatingVotes: "1imDbRatingVotes",
+                  genres: "1genres", runtimeStr: "1runtimeStr", stars: "1stars",
+                  plot: "1plotplotplotplotplotplotplotplotplotplotplotplotplot")
+        ])
+    }
+}

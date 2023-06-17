@@ -9,33 +9,54 @@ import XCTest
 
 final class MovieAppUITests: XCTestCase {
 
+    var app: XCUIApplication!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app.terminate()
     }
+    
+    func test_inputCorrectNameMovie_returnSuccess() throws {
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+        let searchBar = app.navigationBars["Movies"].searchFields["Search Movie"]
+        XCTAssertTrue(searchBar.exists)
+        searchBar.tap()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let keyboard = app.keyboards.element
+        XCTAssertTrue(keyboard.waitForExistence(timeout: 5))
+
+        searchBar.typeText("Shrek")
+
+        app.buttons["Search"].tap()
+        
+        let resultsTable = app.tables["TableMovies"]
+        XCTAssertTrue(resultsTable.exists)
+        sleep(3)
+        XCTAssertTrue(resultsTable.cells.count > 0)
+        let cell = resultsTable.cells.element(boundBy: 0)
+        XCTAssertTrue(cell.exists)
     }
+    
+    func test_inputInCorrectNameMovie_returnSuccess() throws {
+        
+        let searchBar = app.navigationBars["Movies"].searchFields["Search Movie"]
+        XCTAssertTrue(searchBar.exists)
+        searchBar.tap()
+        
+        let keyboard = app.keyboards.element
+        XCTAssertTrue(keyboard.waitForExistence(timeout: 5))
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        searchBar.typeText("арпааораморморм")
+        app.buttons["Search"].tap()
+        
+        let resultsTable = app.tables["TableMovies"]
+        XCTAssertTrue(resultsTable.exists)
+        sleep(3)
+        XCTAssertTrue(resultsTable.cells.count == 0)
     }
 }
